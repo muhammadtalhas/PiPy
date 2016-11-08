@@ -3,20 +3,19 @@ from pygame.locals import *
 import apps
 class OSMain:
     def __init__(self):
-        # Define some colors
+        #colors
         self.BLACK = (0, 0, 0)
         self.WHITE = (255, 255, 255)
         self.GREEN = (0, 255, 0)
         self.RED = (255, 0, 0)
 
+        #Resolution and size + initialize pygame
         self.size = (320,480)
         pygame.init()
         self.screen = pygame.display.set_mode(self.size,pygame.FULLSCREEN)
-
-
-        self.size = (320,480)
         self.screen.fill(self.WHITE)
 
+        #topBar
         pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
 
         #First row
@@ -38,10 +37,18 @@ class OSMain:
         pygame.draw.circle(self.screen, self.RED, (280,420),40, 0)
 
 
-
+#Boot the OS
 OS = OSMain()
+
+#load up apps
 appController = apps.systemApps()
 appController.getAppOrder()
+
+#connect to the GSM module
+FONA = serialCon()
+FONA.connect()
+
+
 done = False
 clock = pygame.time.Clock()
 while not done:
