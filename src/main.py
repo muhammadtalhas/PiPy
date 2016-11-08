@@ -11,31 +11,31 @@ class OSMain:
 
         self.size = (320,480)
         pygame.init()
-        screen = pygame.display.set_mode(self.size,pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode(self.size,pygame.FULLSCREEN)
 
 
         self.size = (320,480)
-        screen.fill(self.WHITE)
+        self.screen.fill(self.WHITE)
 
-        pygame.draw.rect(screen, self.GREEN, (0,0,480,25), 0)
+        pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
 
         #First row
-        pygame.draw.circle(screen, self.RED, (40,180),40, 0)
-        pygame.draw.circle(screen, self.RED, (120,180),40, 0)
-        pygame.draw.circle(screen, self.RED, (200,180),40, 0)
-        pygame.draw.circle(screen, self.RED, (280,180),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (40,180),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (120,180),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (200,180),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (280,180),40, 0)
 
         #Second row
-        pygame.draw.circle(screen, self.RED, (40,300),40, 0)
-        pygame.draw.circle(screen, self.RED, (120,300),40, 0)
-        pygame.draw.circle(screen, self.RED, (200,300),40, 0)
-        pygame.draw.circle(screen, self.RED, (280,300),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (40,300),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (120,300),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (200,300),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (280,300),40, 0)
 
         #Third row
-        pygame.draw.circle(screen, self.RED, (40,420),40, 0)
-        pygame.draw.circle(screen, self.RED, (120,420),40, 0)
-        pygame.draw.circle(screen, self.RED, (200,420),40, 0)
-        pygame.draw.circle(screen, self.RED, (280,420),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (40,420),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (120,420),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (200,420),40, 0)
+        pygame.draw.circle(self.screen, self.RED, (280,420),40, 0)
 
 
 
@@ -45,6 +45,12 @@ appController.getAppOrder()
 done = False
 clock = pygame.time.Clock()
 while not done:
+    myfont = pygame.font.SysFont("monospace", 15)
+    # render text
+    pygame.draw.rect(OS.screen, OS.WHITE, (100,100,200,20), 0)
+    label = myfont.render(str(clock.get_fps()), 1, (255,255,0))
+    OS.screen.blit(label, (100, 100))
+    
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
             print(event.pos)
