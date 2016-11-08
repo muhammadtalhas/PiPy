@@ -48,7 +48,7 @@ while not done:
     myfont = pygame.font.SysFont("monospace", 15)
     # render text
     pygame.draw.rect(OS.screen, OS.WHITE, (100,100,200,20), 0)
-    label = myfont.render(str(clock.get_fps()), 1, (255,255,0))
+    label = myfont.render(str(clock.get_fps()), 1, OS.BLACK)
     OS.screen.blit(label, (100, 100))
     
     for event in pygame.event.get():
