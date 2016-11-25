@@ -2,7 +2,7 @@ import serial
 
 class serialCon():
     def __init__(self):
-        self.baudRate = 9600
+        self.baudRate = 115200
         self.connected = False
 
     def connect(self):

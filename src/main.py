@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-import apps
+import apps, topBar, serialConn
 class OSMain:
     def __init__(self):
         #colors
@@ -16,8 +16,7 @@ class OSMain:
         self.screen.fill(self.WHITE)
 
         #topBar
-        pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
-
+        #pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
         #First row
         pygame.draw.circle(self.screen, self.RED, (40,180),40, 0)
         pygame.draw.circle(self.screen, self.RED, (120,180),40, 0)
@@ -40,26 +39,32 @@ class OSMain:
 #Boot the OS
 OS = OSMain()
 
-#load up apps
-appController = apps.systemApps()
-appController.getAppOrder()
-
 #connect to the GSM module
-FONA = serialCon()
+FONA = serialConn.serialCon()
 FONA.connect()
 
+#load up apps
+appController = apps.systemApps(OS,FONA)
+appController.getAppOrder()
+appController.importApps()
+
+
+
+topBar = topBar.topBar(OS)
 
 done = False
 clock = pygame.time.Clock()
 while not done:
-    myfont = pygame.font.SysFont("monospace", 15)
-    # render text
-    pygame.draw.rect(OS.screen, OS.WHITE, (100,100,200,20), 0)
-    label = myfont.render(str(clock.get_fps()), 1, OS.BLACK)
-    OS.screen.blit(label, (100, 100))
+    #fps data--debug
+    #myfont = pygame.font.SysFont("monospace", 15)
+    #pygame.draw.rect(OS.screen, OS.WHITE, (100,100,200,20), 0)
+    #label = myfont.render(str(clock.get_fps()), 1, OS.BLACK)
+    #OS.screen.blit(label, (100, 100))
     
+    topBar.tick()
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
+            appController.appClick(event)
             print(event.pos)
         if event.type == pygame.QUIT:
             done = True
