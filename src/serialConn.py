@@ -10,8 +10,8 @@ class serialCon():
         self.serialPort = serial.Serial("/dev/ttyAMA0", self.baudRate, timeout=0.5)
         self.serialPort.write('AT\r')
         response = self.serialPort.readlines()
-        for i in range(len(reply)):
-            reply[i] = reply[i].rstrip()
+        for i in range(len(response)):
+            response[i] = response[i].rstrip()
         
         if 'OK' in response:
             print ("Conected to FONA and recieved proper response")

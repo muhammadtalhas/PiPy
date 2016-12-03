@@ -8,6 +8,7 @@ class OSMain:
         self.WHITE = (255, 255, 255)
         self.GREEN = (0, 255, 0)
         self.RED = (255, 0, 0)
+        self.BLUE = (0,0,255)
 
         #Resolution and size + initialize pygame
         self.size = (320,480)
@@ -15,6 +16,7 @@ class OSMain:
         self.screen = pygame.display.set_mode(self.size,pygame.FULLSCREEN)
         self.screen.fill(self.WHITE)
 
+    def drawMainMenu(self):
         #topBar
         #pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
         #First row
@@ -34,14 +36,18 @@ class OSMain:
         pygame.draw.circle(self.screen, self.RED, (120,420),40, 0)
         pygame.draw.circle(self.screen, self.RED, (200,420),40, 0)
         pygame.draw.circle(self.screen, self.RED, (280,420),40, 0)
-
+    def OSUpdate(self):
+        pygame.display.flip()
+        clock.tick(60)
+    def getEvents(self):
+        return pygame.event.get()
 
 #Boot the OS
 OS = OSMain()
 
 #connect to the GSM module
 FONA = serialConn.serialCon()
-FONA.connect()
+#FONA.connect()
 
 #load up apps
 appController = apps.systemApps(OS,FONA)
@@ -60,9 +66,10 @@ while not done:
     #pygame.draw.rect(OS.screen, OS.WHITE, (100,100,200,20), 0)
     #label = myfont.render(str(clock.get_fps()), 1, OS.BLACK)
     #OS.screen.blit(label, (100, 100))
-    
+    events = OS.getEvents()
+    OS.drawMainMenu()
     topBar.tick()
-    for event in pygame.event.get():
+    for event in events:
         if event.type == MOUSEBUTTONDOWN:
             appController.appClick(event)
             print(event.pos)
@@ -74,7 +81,7 @@ while not done:
             #print("YO")
             #done = True
     
-    pygame.display.flip()
-    clock.tick(60)
+    #pygame.display.flip()
+    OS.OSUpdate()
 print (clock)
 pygame.quit()
