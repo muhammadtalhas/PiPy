@@ -14,12 +14,13 @@ class OSMain:
         self.size = (320,480)
         pygame.init()
         self.screen = pygame.display.set_mode(self.size,pygame.FULLSCREEN)
-        self.screen.fill(self.WHITE)
+        #self.screen.fill(self.WHITE)
 
     def drawMainMenu(self):
         #topBar
         #pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
         #First row
+        self.screen.fill(self.WHITE)
         pygame.draw.circle(self.screen, self.RED, (40,180),40, 0)
         pygame.draw.circle(self.screen, self.RED, (120,180),40, 0)
         pygame.draw.circle(self.screen, self.RED, (200,180),40, 0)
@@ -47,7 +48,7 @@ OS = OSMain()
 
 #connect to the GSM module
 FONA = serialConn.serialCon()
-#FONA.connect()
+FONA.connect()
 
 #load up apps
 appController = apps.systemApps(OS,FONA)

@@ -27,8 +27,12 @@ class app():
                     if clicked >= 0 and clicked < 10:
                         number += str(clicked)
                     if clicked == -1:
-                        number = number[:-1]
-                        
+                        if len(number) <=0:
+                            done= True
+                        else:
+                            number = number[:-1]
+                    if clicked == 10:
+                        self.FONA.transmit("AT+"+number+";")
                         
             
     def screenDraw(self, number):
