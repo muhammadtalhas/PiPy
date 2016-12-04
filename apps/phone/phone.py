@@ -32,7 +32,7 @@ class app():
                         else:
                             number = number[:-1]
                     if clicked == 10:
-                        self.FONA.transmit("AT+"+number+";")
+                        self.FONA.transmit("ATD"+number+";")
                         
             
     def screenDraw(self, number):

@@ -28,7 +28,15 @@ class serialCon():
 
     def terminate(self):
         self.serialPort.close()
+    def getLines(self):
+        response = self.serialPort.readlines()
+        print (response)
+
+        
         
 if __name__ == '__main__':
     test = serialCon()
     test.connect()
+
+    while (true):
+        self.getLines()
