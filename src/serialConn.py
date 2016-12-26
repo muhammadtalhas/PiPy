@@ -5,6 +5,7 @@ class serialCon():
         self.baudRate = 115200
         self.connected = False
 
+
     def connect(self):
 
         self.serialPort = serial.Serial("/dev/ttyAMA0", self.baudRate, timeout=0.5)
@@ -14,10 +15,10 @@ class serialCon():
             response[i] = response[i].rstrip()
         
         if 'OK' in response:
-            print ("Conected to FONA and recieved proper response")
+            print ("Connected to FONA and received proper response")
             self.connected = True
         else:
-            print ("Proper response was not recieved from FONA [on ttyAMA0, baud rate at " + self.baudRate + "timed out after 0.5 seconds")
+            print ("Proper response was not recieved from FONA [on ttyAMA0, baud rate at " + str(self.baudRate) + "timed out after 0.5 seconds")
 
     def transmit(self, data):
         self.serialPort.write(data + '\r')
@@ -28,10 +29,12 @@ class serialCon():
 
     def terminate(self):
         self.serialPort.close()
+        self.connected = False
+
     def getLines(self):
         response = self.serialPort.readlines()
-        print (response)
-
+        #print (response)
+        return response
         
         
 if __name__ == '__main__':

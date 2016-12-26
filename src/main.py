@@ -37,18 +37,33 @@ class OSMain:
         pygame.draw.circle(self.screen, self.RED, (120,420),40, 0)
         pygame.draw.circle(self.screen, self.RED, (200,420),40, 0)
         pygame.draw.circle(self.screen, self.RED, (280,420),40, 0)
-    def OSUpdate(self):
+
+
+    def callPopUp(self, incomingNumber):
+        print("call from " + str(incomingNumber))
+    def OSUpdate(self, FONA):
         pygame.display.flip()
         clock.tick(60)
+        self.checkIncoming(FONA)
     def getEvents(self):
         return pygame.event.get()
+    def checkIncoming(self, FONA):
+        lines = FONA.getLines()
+        if "+CLIP" in lines:
+            print("CALL")
+            pygame.draw.rect(OS.screen, OS.GREEN, (0, 50, 480, 25), 0)
+            #Call
+        if "+CMTI" in lines:
+            #Text
+            print("TEXT")
+
 
 #Boot the OS
 OS = OSMain()
 
 #connect to the GSM module
 FONA = serialConn.serialCon()
-FONA.connect()
+#FONA.connect()
 
 #load up apps
 appController = apps.systemApps(OS,FONA)
@@ -79,10 +94,9 @@ while not done:
         if event.type is KEYDOWN and event.key == K_w:
             #Debug to window- uncomment
             pygame.display.set_mode(OS.size)
-            #print("YO")
             #done = True
     
     #pygame.display.flip()
-    OS.OSUpdate()
+    OS.OSUpdate(FONA)
 print (clock)
 pygame.quit()
