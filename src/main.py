@@ -49,14 +49,14 @@ class OSMain:
         return pygame.event.get()
     def checkIncoming(self, FONA):
         lines = FONA.getLines()
-        if "+CLIP" in lines:
+        if "RING\r\n" in lines:
             print("CALL")
             pygame.draw.rect(OS.screen, OS.GREEN, (0, 50, 480, 25), 0)
             #Call
         if "+CMTI" in lines:
             #Text
             print("TEXT")
-        else
+        else:
             print("nothing of value in "+ str(lines))
 
 
