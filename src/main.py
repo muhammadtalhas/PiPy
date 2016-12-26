@@ -63,7 +63,7 @@ OS = OSMain()
 
 #connect to the GSM module
 FONA = serialConn.serialCon()
-#FONA.connect()
+FONA.connect()
 
 #load up apps
 appController = apps.systemApps(OS,FONA)
