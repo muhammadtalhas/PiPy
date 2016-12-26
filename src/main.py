@@ -56,6 +56,8 @@ class OSMain:
         if "+CMTI" in lines:
             #Text
             print("TEXT")
+        else
+            print("nothing of value in "+ str(lines))
 
 
 #Boot the OS
