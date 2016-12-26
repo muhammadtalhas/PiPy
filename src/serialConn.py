@@ -41,5 +41,5 @@ if __name__ == '__main__':
     test = serialCon()
     test.connect()
 
-    while (true):
-        self.getLines()
+    while (True):
+        test.getLines()

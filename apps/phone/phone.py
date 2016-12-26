@@ -7,6 +7,7 @@ class app():
         self.OS = OS
         self.FONA=FONA
         self.topBar = topBar.topBar(OS)
+        self.active = False
 
     def main(self):
         self.OS.screen.fill(self.OS.WHITE)
@@ -27,11 +28,15 @@ class app():
                     if clicked >= 0 and clicked < 10:
                         number += str(clicked)
                     if clicked == -1:
+                        if self.active == True:
+                            self.active = False
+                            self.FONA.transmit("ATH")
                         if len(number) <=0:
                             done= True
                         else:
                             number = number[:-1]
                     if clicked == 10:
+                        self.active = True
                         self.FONA.transmit("ATD"+number+";")
                         
             

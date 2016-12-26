@@ -12,6 +12,8 @@ class OSMain:
         self.RED = (255, 0, 0)
         self.BLUE = (0, 0, 255)
 
+        self.incomingAcknowledged = False
+
         # Resolution and size + initialize pygame
         self.size = (320, 480)
         pygame.init()
@@ -40,11 +42,28 @@ class OSMain:
         pygame.draw.circle(self.screen, self.RED, (200, 420), 40, 0)
         pygame.draw.circle(self.screen, self.RED, (280, 420), 40, 0)
 
+        # test area
+
+
     def callPopUp(self, incomingNumber):
         print("call from " + str(incomingNumber))
+        #main popup area
+        pygame.draw.rect(OS.screen, OS.BLACK, (0, 50, 480, 80), 0)
+        pygame.draw.rect(OS.screen, (5, 220, 185), (0, 55, 480, 70), 0)
+
+        #answer and ignore buttons
+        pygame.draw.rect(OS.screen, OS.GREEN, (0, 90, 160, 35), 0)
+        pygame.draw.rect(OS.screen, OS.RED, (160, 90, 160, 35), 0)
+
+        #Incming label
+        Font = pygame.font.Font('BebasNeue.otf', 20)
+        incomingCallLbl = Font.render("Incoming Call: " + str(incomingNumber), 1, self.BLACK)
+        self.screen.blit(incomingCallLbl, (0, 65))
+
 
     def OSUpdate(self, FONA):
         pygame.display.flip()
+        time.sleep(10)
         clock.tick(60)
         self.checkIncoming(FONA)
 
@@ -53,12 +72,20 @@ class OSMain:
 
     def checkIncoming(self, FONA):
         lines = FONA.getLines()
+        if self.incomingAcknowledged == True:
+            self.incomingAcknowledged = False
+            lines = []
+            return None
         if "RING\r\n" in lines:
             print("CALL")
+            self.incomingAcknowledged = True
             starting = int(time.time())
 
+            extractedRawStr = lines[3]
+            extractedNumber = extractedRawStr[6:]
+            extractedNumber = extractedNumber[:-1]
             while (int(time.time()) - starting < 45):
-                pygame.draw.rect(OS.screen, OS.BLACK, (0, 50, 480, 25), 0)
+                self.callPopUp(self, extractedNumber)
                 # Call
         if "+CMTI" in lines:
             # Text
@@ -72,7 +99,7 @@ OS = OSMain()
 
 # connect to the GSM module
 FONA = serialConn.serialCon()
-FONA.connect()
+# FONA.connect()
 
 # load up apps
 appController = apps.systemApps(OS, FONA)
