@@ -63,7 +63,6 @@ class OSMain:
 
     def OSUpdate(self, FONA):
         pygame.display.flip()
-        time.sleep(10)
         clock.tick(60)
         self.checkIncoming(FONA)
 
@@ -85,7 +84,8 @@ class OSMain:
             extractedNumber = extractedRawStr[6:]
             extractedNumber = extractedNumber[:-1]
             while (int(time.time()) - starting < 45):
-                self.callPopUp(self, extractedNumber)
+                self.callPopUp(extractedNumber)
+                pygame.display.flip()
                 # Call
         if "+CMTI" in lines:
             # Text
@@ -99,7 +99,7 @@ OS = OSMain()
 
 # connect to the GSM module
 FONA = serialConn.serialCon()
-# FONA.connect()
+FONA.connect()
 
 # load up apps
 appController = apps.systemApps(OS, FONA)
