@@ -30,6 +30,7 @@ class app():
                     if clicked == -1:
                         if self.active == True:
                             self.active = False
+
                             self.FONA.transmit("ATH")
                         if len(number) <=0:
                             done= True
@@ -111,4 +112,3 @@ class app():
                     return 10
             return -2
         return -2
-                

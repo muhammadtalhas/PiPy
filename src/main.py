@@ -13,6 +13,7 @@ class OSMain:
         self.BLUE = (0, 0, 255)
 
         self.incomingAcknowledged = False
+        self.internalTimer = 0
 
         # Resolution and size + initialize pygame
         self.size = (320, 480)
@@ -47,15 +48,15 @@ class OSMain:
 
     def callPopUp(self, incomingNumber):
         print("call from " + str(incomingNumber))
-        #main popup area
+        # main popup area
         pygame.draw.rect(OS.screen, OS.BLACK, (0, 50, 480, 80), 0)
         pygame.draw.rect(OS.screen, (5, 220, 185), (0, 55, 480, 70), 0)
 
-        #answer and ignore buttons
+        # answer and ignore buttons
         pygame.draw.rect(OS.screen, OS.GREEN, (0, 90, 160, 35), 0)
         pygame.draw.rect(OS.screen, OS.RED, (160, 90, 160, 35), 0)
 
-        #Incming label
+        # Incming label
         Font = pygame.font.Font('BebasNeue.otf', 20)
         incomingCallLbl = Font.render("Incoming Call: " + str(incomingNumber), 1, self.BLACK)
         self.screen.blit(incomingCallLbl, (0, 65))
@@ -64,7 +65,12 @@ class OSMain:
     def OSUpdate(self, FONA):
         pygame.display.flip()
         clock.tick(60)
-        self.checkIncoming(FONA)
+        if self.internalTimer == 0:
+
+            self.checkIncoming(FONA)
+        elif int(time.time()) - self.internalTimer > 5:
+            self.internalTimer = int(time.time())
+            self.checkIncoming(FONA)
 
     def getEvents(self):
         return pygame.event.get()
@@ -83,9 +89,19 @@ class OSMain:
             extractedRawStr = lines[3]
             extractedNumber = extractedRawStr[6:]
             extractedNumber = extractedNumber[:-1]
-            while (int(time.time()) - starting < 45):
+            while int(time.time()) - starting < 45:
                 self.callPopUp(extractedNumber)
                 pygame.display.flip()
+                for event in events:
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.pos[0] > 0 and event.pos[0] < 160:
+                            if event.pos[1] > 90 and event.pos[1] < 125:
+                                FONA.transmit("ATA")
+                        if event.pos[0] > 160 and event.pos[0] < 320:
+                            if event.pos[1] > 90 and event.pos[1] < 125:
+                                FONA.transmit("ATH")
+                                break
+                clock.tick(60)
                 # Call
         if "+CMTI" in lines:
             # Text
@@ -100,6 +116,10 @@ OS = OSMain()
 # connect to the GSM module
 FONA = serialConn.serialCon()
 FONA.connect()
+
+# setup FONA
+FONA.transmit("AT+CHFA=1")
+FONA.transmit("AT+CMIC=1,15")
 
 # load up apps
 appController = apps.systemApps(OS, FONA)
