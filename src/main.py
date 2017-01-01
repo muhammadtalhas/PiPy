@@ -62,7 +62,7 @@ class OSMain:
         self.screen.blit(incomingCallLbl, (0, 65))
 
 
-    def OSUpdate(self, FONA):
+    def OSUpdate(self, FONA, events):
         pygame.display.flip()
         clock.tick(60)
         if self.internalTimer == 0:
@@ -70,12 +70,12 @@ class OSMain:
             self.checkIncoming(FONA)
         elif int(time.time()) - self.internalTimer > 5:
             self.internalTimer = int(time.time())
-            self.checkIncoming(FONA)
+            self.checkIncoming(FONA, events)
 
     def getEvents(self):
         return pygame.event.get()
 
-    def checkIncoming(self, FONA):
+    def checkIncoming(self, FONA, events):
         lines = FONA.getLines()
         if self.incomingAcknowledged == True:
             self.incomingAcknowledged = False
@@ -108,7 +108,7 @@ class OSMain:
         if "+CMTI" in lines:
             # Text
             print("TEXT")
-        else:
+        #else:
             #print("nothing of value in " + str(lines))
 
 
@@ -153,6 +153,6 @@ while not done:
             # done = True
 
     # pygame.display.flip()
-    OS.OSUpdate(FONA)
+    OS.OSUpdate(FONA, events)
 print(clock)
 pygame.quit()
