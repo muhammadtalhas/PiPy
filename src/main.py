@@ -47,7 +47,7 @@ class OSMain:
 
 
     def callPopUp(self, incomingNumber):
-        print("call from " + str(incomingNumber))
+        # print("call from " + str(incomingNumber))
         # main popup area
         pygame.draw.rect(OS.screen, OS.BLACK, (0, 50, 480, 80), 0)
         pygame.draw.rect(OS.screen, (5, 220, 185), (0, 55, 480, 70), 0)
@@ -89,10 +89,12 @@ class OSMain:
             extractedRawStr = lines[3]
             extractedNumber = extractedRawStr[6:]
             extractedNumber = extractedNumber[:-1]
+            print("Starting loop for popup")
             while int(time.time()) - starting < 45:
                 self.callPopUp(extractedNumber)
                 pygame.display.flip()
                 for event in events:
+                    print( str(event.type) + str(event.pos))
                     if event.type == MOUSEBUTTONDOWN:
                         if event.pos[0] > 0 and event.pos[0] < 160:
                             if event.pos[1] > 90 and event.pos[1] < 125:
@@ -107,7 +109,7 @@ class OSMain:
             # Text
             print("TEXT")
         else:
-            print("nothing of value in " + str(lines))
+            #print("nothing of value in " + str(lines))
 
 
 # Boot the OS
