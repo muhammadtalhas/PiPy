@@ -62,7 +62,7 @@ class OSMain:
         self.screen.blit(incomingCallLbl, (0, 65))
 
 
-    def OSUpdate(self, FONA, events):
+    def OSUpdate(self, FONA):
         pygame.display.flip()
         clock.tick(60)
         if self.internalTimer == 0:
@@ -70,12 +70,12 @@ class OSMain:
             self.checkIncoming(FONA)
         elif int(time.time()) - self.internalTimer > 5:
             self.internalTimer = int(time.time())
-            self.checkIncoming(FONA, events)
+            self.checkIncoming(FONA)
 
     def getEvents(self):
         return pygame.event.get()
 
-    def checkIncoming(self, FONA, events):
+    def checkIncoming(self, FONA):
         lines = FONA.getLines()
         if self.incomingAcknowledged == True:
             self.incomingAcknowledged = False
@@ -94,7 +94,7 @@ class OSMain:
                 self.callPopUp(extractedNumber)
                 pygame.display.flip()
                 for event in events:
-                    print( str(event.type) + str(event.pos))
+                    print(str(event.type) + str(event.pos))
                     if event.type == MOUSEBUTTONDOWN:
                         if event.pos[0] > 0 and event.pos[0] < 160:
                             if event.pos[1] > 90 and event.pos[1] < 125:
@@ -153,6 +153,6 @@ while not done:
             # done = True
 
     # pygame.display.flip()
-    OS.OSUpdate(FONA, events)
+    OS.OSUpdate(FONA)
 print(clock)
 pygame.quit()

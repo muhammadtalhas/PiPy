@@ -16,7 +16,7 @@ class app():
         number = ""
         while not done:
             self.topBar.tick()
-            self.OS.OSUpdate(self.FONA, events)
+            self.OS.OSUpdate(self.FONA)
             self.screenDraw(number)
             events = self.OS.getEvents()
             for event in events:
