@@ -74,10 +74,10 @@ class systemApps:
             if event.pos[0] > 0 and event.pos[0] < 160:
                 if event.pos[1] > 90 and event.pos[1] < 125:
                     self.OS.incomingAcknowledged = False
-                    FONA.transmit("ATA")
+                    self.FONA.transmit("ATA")
                     return "ANSWER"
             if event.pos[0] > 160 and event.pos[0] < 320:
                 if event.pos[1] > 90 and event.pos[1] < 125:
                     self.OS.incomingAcknowledged = False
-                    FONA.transmit("ATH")
+                    self.FONA.transmit("ATH")
                     return "IGNORE"
