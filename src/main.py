@@ -27,6 +27,7 @@ class OSMain:
         # topBar
         # pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
         # First row
+        self.screen.fill(self.WHITE)
 
         #incoming call popup
         if self.incomingAcknowledged == True:
@@ -48,7 +49,6 @@ class OSMain:
         else:
             self.incomingNumber = ""
 
-        self.screen.fill(self.WHITE)
         pygame.draw.circle(self.screen, self.RED, (40, 180), 40, 0)
         pygame.draw.circle(self.screen, self.RED, (120, 180), 40, 0)
         pygame.draw.circle(self.screen, self.RED, (200, 180), 40, 0)
