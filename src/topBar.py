@@ -8,7 +8,10 @@ class topBar:
         pygame.draw.rect(OS.screen, OS.GREEN, (0,0,480,25), 0)
         
     def tick(self):
-        pygame.draw.rect(self.OSConnector.screen, self.OSConnector.GREEN, (0,0,480,25), 0)
+        if self.OSConnector.incomingincomingAcknowledged == True:
+            pygame.draw.rect(self.OSConnector.screen, self.OSConnector.BLUE, (0,0,480,25), 0)
+        else:
+            pygame.draw.rect(self.OSConnector.screen, self.OSConnector.GREEN, (0,0,480,25), 0)
         now = datetime.now()
         strTim = now.strftime('%H:%M')
         timeFont = pygame.font.Font('alarm clock.ttf', 15)
