@@ -91,6 +91,7 @@ class OSMain:
         if self.internalTimer == 0:
             self.checkIncoming(FONA)
         elif int(time.time()) - self.internalTimer > 5 and self.incomingAcknowledged == False:
+            print("running Check")
             self.internalTimer = int(time.time())
             self.checkIncoming(FONA)
 
@@ -99,10 +100,10 @@ class OSMain:
 
     def checkIncoming(self, FONA):
         lines = FONA.getLines()
-        if self.incomingAcknowledged == True:
-            self.incomingAcknowledged = False
-            lines = []
-            return None
+        #if self.incomingAcknowledged == True:
+        #    self.incomingAcknowledged = False
+        #    lines = []
+        #    return None
         if "RING\r\n" in lines:
             print("CALL")
             self.incomingAcknowledged = True
