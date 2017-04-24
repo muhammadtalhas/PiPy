@@ -23,6 +23,24 @@ class OSMain:
         self.screen = pygame.display.set_mode(self.size, pygame.FULLSCREEN)
         # self.screen.fill(self.WHITE)
 
+
+
+
+    def callPopUp(self, incomingNumber):
+        # print("call from " + str(incomingNumber))
+        # main popup area
+        pygame.draw.rect(OS.screen, OS.BLACK, (0, 50, 480, 80), 0)
+        pygame.draw.rect(OS.screen, (5, 220, 185), (0, 55, 480, 70), 0)
+
+        # answer and ignore buttons
+        pygame.draw.rect(OS.screen, OS.GREEN, (0, 90, 160, 35), 0)
+        pygame.draw.rect(OS.screen, OS.RED, (160, 90, 160, 35), 0)
+
+        # Incming label
+        Font = pygame.font.Font('BebasNeue.otf', 20)
+        incomingCallLbl = Font.render("Incoming Call: " + str(incomingNumber), 1, self.BLACK)
+        self.screen.blit(incomingCallLbl, (0, 65))
+
     def drawMainMenu(self):
         # topBar
         # pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
@@ -53,23 +71,6 @@ class OSMain:
         pygame.draw.circle(self.screen, self.RED, (280, 420), 40, 0)
 
         # test area
-
-
-    def callPopUp(self, incomingNumber):
-        # print("call from " + str(incomingNumber))
-        # main popup area
-        pygame.draw.rect(OS.screen, OS.BLACK, (0, 50, 480, 80), 0)
-        pygame.draw.rect(OS.screen, (5, 220, 185), (0, 55, 480, 70), 0)
-
-        # answer and ignore buttons
-        pygame.draw.rect(OS.screen, OS.GREEN, (0, 90, 160, 35), 0)
-        pygame.draw.rect(OS.screen, OS.RED, (160, 90, 160, 35), 0)
-
-        # Incming label
-        Font = pygame.font.Font('BebasNeue.otf', 20)
-        incomingCallLbl = Font.render("Incoming Call: " + str(incomingNumber), 1, self.BLACK)
-        self.screen.blit(incomingCallLbl, (0, 65))
-
 
     def OSUpdate(self, FONA):
         pygame.display.flip()
