@@ -73,11 +73,11 @@ class systemApps:
         if event.type == MOUSEBUTTONDOWN:
             if event.pos[0] > 0 and event.pos[0] < 160:
                 if event.pos[1] > 90 and event.pos[1] < 125:
-                    OS.incomingAcknowledged = False
+                    self.OS.incomingAcknowledged = False
                     FONA.transmit("ATA")
                     return "ANSWER"
             if event.pos[0] > 160 and event.pos[0] < 320:
                 if event.pos[1] > 90 and event.pos[1] < 125:
-                    OS.incomingAcknowledged = False
+                    self.OS.incomingAcknowledged = False
                     FONA.transmit("ATH")
                     return "IGNORE"
