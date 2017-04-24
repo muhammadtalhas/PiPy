@@ -13,7 +13,9 @@ class OSMain:
         self.BLUE = (0, 0, 255)
 
         self.incomingAcknowledged = False
+        self.acknowledgedTime = -1
         self.internalTimer = 0
+        self.incomingNumber = ""
 
         # Resolution and size + initialize pygame
         self.size = (320, 480)
@@ -25,6 +27,13 @@ class OSMain:
         # topBar
         # pygame.draw.rect(self.screen, self.GREEN, (0,0,480,25), 0)
         # First row
+
+        #incoming call popup
+        if self.incomingAcknowledged == True:
+            callPopUp(self.incomingNumber)
+        else:
+            self.incomingNumber = ""
+
         self.screen.fill(self.WHITE)
         pygame.draw.circle(self.screen, self.RED, (40, 180), 40, 0)
         pygame.draw.circle(self.screen, self.RED, (120, 180), 40, 0)
@@ -66,9 +75,8 @@ class OSMain:
         pygame.display.flip()
         clock.tick(60)
         if self.internalTimer == 0:
-
             self.checkIncoming(FONA)
-        elif int(time.time()) - self.internalTimer > 5:
+        elif int(time.time()) - self.internalTimer > 5 and not self.incomingAcknowledged:
             self.internalTimer = int(time.time())
             self.checkIncoming(FONA)
 
@@ -89,21 +97,22 @@ class OSMain:
             extractedRawStr = lines[3]
             extractedNumber = extractedRawStr[6:]
             extractedNumber = extractedNumber[:-1]
-            print("Starting loop for popup")
-            while int(time.time()) - starting < 45:
-                self.callPopUp(extractedNumber)
-                pygame.display.flip()
-                for event in events:
-                    print(str(event.type) + str(event.pos))
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.pos[0] > 0 and event.pos[0] < 160:
-                            if event.pos[1] > 90 and event.pos[1] < 125:
-                                FONA.transmit("ATA")
-                        if event.pos[0] > 160 and event.pos[0] < 320:
-                            if event.pos[1] > 90 and event.pos[1] < 125:
-                                FONA.transmit("ATH")
-                                break
-                clock.tick(60)
+            self.incomingNumber=extractedNumber
+            #print("Starting loop for popup")
+            #while int(time.time()) - starting < 45:
+            #    self.callPopUp(extractedNumber)
+            #    pygame.display.flip()
+            #    for event in events:
+            #        print(str(event.type) + str(event.pos))
+            #        if event.type == MOUSEBUTTONDOWN:
+            #            if event.pos[0] > 0 and event.pos[0] < 160:
+            #                if event.pos[1] > 90 and event.pos[1] < 125:
+            #                    FONA.transmit("ATA")
+            #            if event.pos[0] > 160 and event.pos[0] < 320:
+            #                if event.pos[1] > 90 and event.pos[1] < 125:
+            #                    FONA.transmit("ATH")
+            #                    break
+            #    clock.tick(60)
                 # Call
         if "+CMTI" in lines:
             # Text
@@ -143,7 +152,10 @@ while not done:
     topBar.tick()
     for event in events:
         if event.type == MOUSEBUTTONDOWN:
-            appController.appClick(event)
+            if OS.incomingAcknowledged:
+                appController.incomingCallInput(event)
+            else:
+                appController.appClick(event)
             print(event.pos)
         if event.type == pygame.QUIT:
             done = True
