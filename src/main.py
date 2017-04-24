@@ -167,6 +167,7 @@ while not done:
     for event in events:
         if event.type == MOUSEBUTTONDOWN:
             if OS.incomingAcknowledged:
+                print("events relayed to popup")
                 appController.incomingCallInput(event)
             else:
                 appController.appClick(event)
