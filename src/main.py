@@ -33,6 +33,7 @@ class OSMain:
             #self.callPopUp(self.incomingNumber)
             # print("call from " + str(incomingNumber))
             # main popup area
+            print("PLACING POPUP")
             pygame.draw.rect(OS.screen, OS.BLACK, (0, 50, 480, 80), 0)
             pygame.draw.rect(OS.screen, (5, 220, 185), (0, 55, 480, 70), 0)
 
