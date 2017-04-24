@@ -16,7 +16,8 @@ class app():
         number = ""
         while not done:
             self.topBar.tick()
-            self.OS.OSUpdate(self.FONA)
+            #TODO check if this fixes lag in phone
+            #self.OS.OSUpdate(self.FONA)
             self.screenDraw(number)
             events = self.OS.getEvents()
             for event in events:

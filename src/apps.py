@@ -19,7 +19,8 @@ class systemApps:
                 if event.pos[1] > 140 and event.pos[1] < 220:
                     print(1)
                     #TODO add these in for other options CONFIRM THAT APP IS LOADED
-                    self.loadedAppObjects[0].main()
+                    if len(self.loadedAppObjects)>0:
+                        self.loadedAppObjects[0].main()
                     return 1
                 if event.pos[1] > 260 and event.pos[1] < 340:
                     print(5)
