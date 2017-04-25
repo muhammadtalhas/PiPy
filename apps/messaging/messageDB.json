@@ -1,0 +1,18 @@
+{
+  "messages":[
+    {
+      "phone_number":"+17032033596",
+      "msgs":[
+        {"time":"1493093368","data":"Test Msg lol","type":"IN"},
+        {"time":"1493093400","data":"Another Test Msg lol","type":"OUT"}
+      ]
+    },
+    {
+      "phone_number":"+17036556021",
+      "msgs":[
+        {"time":"1493093360","data":"Test from Mom","type":"IN"},
+        {"time":"1493093396","data":"Another Test Msg from MOM","type":"OUT"}
+      ]
+    }
+  ]
+}
