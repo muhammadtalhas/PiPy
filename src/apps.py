@@ -88,6 +88,8 @@ class systemApps:
 
     def importApps(self):
         for string in self.appOrder:
+            print("loading "+string)
+            print("at "+'../apps/' + string + '/' + string + '.py')
             self.appInstances.append(imp.load_source(string + '.app', '../apps/' + string + '/' + string + '.py'))
         for apps in self.appInstances:
             self.loadedAppObjects.append(apps.app(self.OS, self.FONA))
