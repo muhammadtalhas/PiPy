@@ -8,7 +8,7 @@ class topBar:
         pygame.draw.rect(OS.screen, OS.GREEN, (0,0,480,25), 0)
         
     def tick(self):
-        if self.OSConnector.incomingincomingAcknowledged == True:
+        if self.OSConnector.incomingAcknowledged == True:
             pygame.draw.rect(self.OSConnector.screen, self.OSConnector.BLUE, (0,0,480,25), 0)
         else:
             pygame.draw.rect(self.OSConnector.screen, self.OSConnector.GREEN, (0,0,480,25), 0)
