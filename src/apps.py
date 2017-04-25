@@ -88,9 +88,8 @@ class systemApps:
 
     def importApps(self):
         for string in self.appOrder:
-            print("loading "+string)
-            print("at "+'../apps/' + string + '/' + string + '.py')
-            self.appInstances.append(imp.load_source(string + '.app', '../apps/' + string + '/' + string + '.py'))
+            sanatizedString = string.strip()
+            self.appInstances.append(imp.load_source(sanatizedString + '.app', '../apps/' + sanatizedString + '/' + sanatizedString + '.py'))
         for apps in self.appInstances:
             self.loadedAppObjects.append(apps.app(self.OS, self.FONA))
 
@@ -108,5 +107,5 @@ class systemApps:
                     return "IGNORE"
 
 if __name__ == "__main__":
-    string = 'dumb'
+    string = 'phone'
     imp.load_source(string + '.app', '../apps/' + string + '/' + string + '.py')
