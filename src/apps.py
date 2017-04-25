@@ -106,3 +106,7 @@ class systemApps:
                     self.OS.incomingAcknowledged = False
                     self.FONA.transmit("ATH")
                     return "IGNORE"
+
+if __name__ == "__main__":
+    string = 'dumb'
+    imp.load_source(string + '.app', '../apps/' + string + '/' + string + '.py')
