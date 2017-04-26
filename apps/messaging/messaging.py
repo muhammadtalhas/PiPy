@@ -24,7 +24,7 @@ class app():
         while not done:
             self.topBar.tick()
             self.OS.OSUpdate(self.FONA)
-            if self.openedConvo != "":
+            if self.openedConvo == "":
                 self.drawMain(self.currentScroll)
 
 
@@ -33,7 +33,6 @@ class app():
         #scroll up here
         #pos[0] 0 - 320
         #pos[1] 25-50
-        print ("attempting to blit")
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,50),(320,50),4)
         #pos[0] 0 - 320
         #pos[1] 50-252.5
