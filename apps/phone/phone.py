@@ -22,7 +22,6 @@ class app():
             for event in events:
                 if event.type == MOUSEBUTTONDOWN:
                     clicked = -2
-                    print("In Phone App")
                     print(event.pos)
                     clicked = self.readClicks(event)
                     if clicked >= 0 and clicked < 10:

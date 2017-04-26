@@ -17,8 +17,9 @@ class app():
 
 
         self.currentScroll=0
+        self.tapBuffer = -2
 
-        self.openedConvo=""
+        self.openedConvo=-1
 
     def main(self):
         self.loadDB()
@@ -27,10 +28,34 @@ class app():
         while not done:
             self.topBar.tick()
             self.OS.OSUpdate(self.FONA)
-            if self.openedConvo == "":
+            if self.openedConvo == -1:
                 self.drawMain(self.currentScroll)
-
-
+            #TODO other views
+            events = self.OS.getEvents()
+            for event in events:
+                if event.type == MOUSEBUTTONDOWN:
+                    self.tapBuffer=self.clickManager(event)
+                    if self.tapBuffer == -1:
+                        self.tapBuffer = -2
+                        done = True
+                    if self.tapBuffer == 0:
+                        self.currentScroll -= 2
+                        if self.currentScroll < 0:
+                            self.currentScroll = 0
+                        self.tapBuffer = -2
+                    if self.tapBuffer == 1:
+                        self.openedConvo = self.currentScroll
+                        self.tapBuffer = -2
+                    if self.tapBuffer == 2:
+                        if(len(self.msgObjs)<self.currentScroll+1):
+                            self.openedConvo = self.currentScroll+1
+                        self.tapBuffer = -2
+                    if self.tapBuffer == 3:
+                        if(len(self.msgObjs)<self.currentScroll+2):
+                            self.currentScroll += 2
+                        else:
+                            self.currentScroll = 0
+                        self.tapBuffer = -2
 
     def drawMain(self,firstIndex):
         #scroll up here
@@ -38,6 +63,9 @@ class app():
         #pos[1] 25-50
         upArrow = self.fontBoldSmall.render(u"\u25B2", 1, self.OS.BLACK)
         self.OS.screen.blit(upArrow, (37.5, 151.25))
+
+        #back button
+        pygame.draw.rect(self.OS.screen, self.OS.RED,  [20, 37.5, 15, 15])
 
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,50),(320,50),4)
         #pos[0] 0 - 320
@@ -59,9 +87,30 @@ class app():
         #pos[0] 0 - 320
         #pos[1] 455-480
         downArrow = self.fontBoldSmall.render(u"\u25BC", 1, self.OS.BLACK)
-        self.OS.screen.blit(downArrow, (455, 151.25))
+        self.OS.screen.blit(downArrow, (467.5, 151.25))
 
-
+    def clickManager(self,event):
+        #-1 is back
+        #0 is scroll up
+        #1 is first box
+        #2 is second box
+        #3 is scroll down
+          if event.type == MOUSEBUTTONDOWN:
+            if event.pos[0] >= 0 and event.pos[0] <= 320:
+                #special case for back
+                if event.pos[0]>5 and event.pos[0]<20:
+                    if event.pos[1]>30 and event.pos[1]<45:
+                        return -1
+                if event.pos[1] > 0 and event.pos[1] < 50:
+                    return 0
+                if event.pos[1] > 50 and event.pos[1] < 252.50:
+                    return 1
+                if event.pos[1] > 252.50 and event.pos[1] < 455:
+                    return 2
+                if event.pos[1] > 455 and event.pos[1] < 480:
+                    return 3
+            else:
+                return -2
 
     def loadDB(self):
         #TODO do a search for ".." and make everything full path. Relative will break stuff dependign on enviorment
