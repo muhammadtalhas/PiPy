@@ -53,7 +53,8 @@ class app():
 
 
     def loadDB(self):
-        with open('messageDB.json') as data_file:
+        #TODO do a search for ".." and make everything full path. Relative will break stuff dependign on enviorment
+        with open('../apps/messaging/messageDB.json') as data_file:
             data = json.load(data_file)
             for convo in data["messages"]:
                 self.msgObjs.append(convo)
