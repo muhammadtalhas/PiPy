@@ -13,6 +13,8 @@ class app():
 
         self.font=pygame.font.Font('Roboto-Regular.ttf', 40)
         self.fontBold=pygame.font.Font('Roboto-Bold.ttf', 40)
+        self.fontBoldSmall=pygame.font.Font('Roboto-Bold.ttf', 10)
+
 
         self.currentScroll=0
 
@@ -34,19 +36,23 @@ class app():
         #scroll up here
         #pos[0] 0 - 320
         #pos[1] 25-50
+        upArrow = self.fontBoldSmall.render("?", 1, self.OS.BLACK)
+        self.OS.screen.blit(upArrow, (37.5, 151.25))
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,50),(320,50),4)
         #pos[0] 0 - 320
         #pos[1] 50-252.5
         phoneNumberOne = self.fontBold.render(self.msgObjs[firstIndex]['phone_number'], 1, self.OS.BLACK)
-        self.OS.screen.blit(phoneNumberOne, (160, 151.25))
+        self.OS.screen.blit(phoneNumberOne, (0, 151.25))
 
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,252.5),(320,252.5),1)
         #pos[0] 0 - 320
         #pos[1] 252.5-455
         if len(self.msgObjs) > 1 and len(self.msgObjs) != firstIndex+1:
             phoneNumberTwo = self.fontBold.render(self.msgObjs[firstIndex+1]['phone_number'], 1, self.OS.BLACK)
-            self.OS.screen.blit(phoneNumberTwo, (160, 353.75))
+            self.OS.screen.blit(phoneNumberTwo, (0, 353.75))
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,455),(320,455),4)
+        downArrow = self.fontBoldSmall.render("?", 1, self.OS.BLACK)
+        self.OS.screen.blit(downArrow, (455, 151.25))
         #scroll down here
         #pos[0] 0 - 320
         #pos[1] 455-480
