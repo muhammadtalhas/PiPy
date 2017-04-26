@@ -17,6 +17,7 @@ class app():
         self.openedConvo=""
 
     def main(self):
+        done = False
         self.OS.screen.fill(self.OS.WHITE)
         while not done:
             self.topBar.tick()
