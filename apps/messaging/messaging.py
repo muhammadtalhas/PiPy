@@ -19,6 +19,7 @@ class app():
         self.openedConvo=""
 
     def main(self):
+        self.loadDB()
         done = False
         self.OS.screen.fill(self.OS.WHITE)
         while not done:
