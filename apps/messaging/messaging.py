@@ -37,14 +37,14 @@ class app():
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,50),(320,50),4)
         #pos[0] 0 - 320
         #pos[1] 50-252.5
-        phoneNumberOne = self.fontBold.render(self.msgObjs[firstIndex]['phone_number'], 1, self.BLACK)
+        phoneNumberOne = self.fontBold.render(self.msgObjs[firstIndex]['phone_number'], 1, self.OS.BLACK)
         self.OS.screen.blit(phoneNumberOne, (160, 151.25))
 
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,252.5),(320,252.5),1)
         #pos[0] 0 - 320
         #pos[1] 252.5-455
         if len(msgObjs) > 1 and len(msgObjs) != firstIndex+1:
-            phoneNumberTwo = self.fontBold.render(self.msgObjs[firstIndex+1]['phone_number'], 1, self.BLACK)
+            phoneNumberTwo = self.fontBold.render(self.msgObjs[firstIndex+1]['phone_number'], 1, self.OS.BLACK)
             self.OS.screen.blit(phoneNumberTwo, (160, 353.75))
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,455),(320,455),4)
         #scroll down here
