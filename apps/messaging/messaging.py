@@ -7,6 +7,8 @@ class app():
     #def __init__(self):
         self.OS = OS
         self.FONA=FONA
+        self.topBar = topBar.topBar(OS)
+
         self.msgObjs = []
 
         self.font=pygame.font.Font('Roboto-Regular.ttf', 40)
