@@ -35,6 +35,7 @@ class app():
             for event in events:
                 if event.type == MOUSEBUTTONDOWN:
                     self.tapBuffer=self.clickManager(event)
+                    print("Click signal of " + self.tapBuffer)
                     if self.tapBuffer == -1:
                         self.tapBuffer = -2
                         done = True
