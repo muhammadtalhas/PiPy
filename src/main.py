@@ -90,7 +90,7 @@ class OSMain:
         clock.tick(60)
         if self.internalTimer == 0:
             self.checkIncoming(FONA)
-        elif int(time.time()) - self.internalTimer > 5 and self.incomingAcknowledged == False:
+        elif int(time.time()) - self.internalTimer > 10 and self.incomingAcknowledged == False:
             print("running Check")
             self.internalTimer = int(time.time())
             self.checkIncoming(FONA)

@@ -1,6 +1,6 @@
 import json
 import pygame
-#import topBar, serialConn
+import topBar, serialConn
 from pygame.locals import *
 
 class app():
