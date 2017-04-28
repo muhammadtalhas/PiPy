@@ -28,6 +28,7 @@ class app():
         while not done:
             self.topBar.tick()
             self.OS.OSUpdate(self.FONA)
+            self.OS.screen.fill(self.OS.WHITE)
             if self.openedConvo == -1:
                 self.drawMain(self.currentScroll)
             #TODO other views
