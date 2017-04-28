@@ -1,5 +1,6 @@
 import json
-import topBar, serialConn, pygame
+import pygame
+#import topBar, serialConn
 from pygame.locals import *
 
 class app():
@@ -7,6 +8,7 @@ class app():
     #def __init__(self):
         self.OS = OS
         self.FONA=FONA
+        #todo FOR DRAW DEBUG
         self.topBar = topBar.topBar(OS)
 
         self.msgObjs = []
@@ -26,17 +28,18 @@ class app():
         done = False
         self.OS.screen.fill(self.OS.WHITE)
         while not done:
+            # todo FOR DRAW DEBUG
             self.topBar.tick()
             self.OS.OSUpdate(self.FONA)
             self.OS.screen.fill(self.OS.WHITE)
             if self.openedConvo == -1:
                 self.drawMain(self.currentScroll)
             #TODO other views
+            # todo FOR DRAW DEBUG
             events = self.OS.getEvents()
             for event in events:
                 if event.type == MOUSEBUTTONDOWN:
                     self.tapBuffer=self.clickManager(event)
-                    print("Click signal of " + str(self.tapBuffer))
                     if self.tapBuffer == -1:
                         self.tapBuffer = -2
                         done = True
@@ -67,7 +70,7 @@ class app():
         self.OS.screen.blit(upArrow, (37.5, 151.25))
 
         #back button
-        pygame.draw.rect(self.OS.screen, self.OS.RED,  [20, 37.5, 15, 15])
+        pygame.draw.rect(self.OS.screen, self.OS.RED,  [0, 25, 50, 25])
 
         pygame.draw.line(self.OS.screen,self.OS.BLACK,(0,50),(320,50),4)
         #pos[0] 0 - 320
@@ -100,8 +103,8 @@ class app():
           if event.type == MOUSEBUTTONDOWN:
             if event.pos[0] >= 0 and event.pos[0] <= 320:
                 #special case for back
-                if event.pos[0]>5 and event.pos[0]<20:
-                    if event.pos[1]>30 and event.pos[1]<45:
+                if event.pos[0]>0 and event.pos[0]<50:
+                    if event.pos[1]>25 and event.pos[1]<50:
                         return -1
                 if event.pos[1] > 0 and event.pos[1] < 50:
                     return 0
@@ -122,12 +125,31 @@ class app():
                 self.msgObjs.append(convo)
 
 if __name__ == "__main__":
-    app = app()
-    print(app.msgObjs)
-    app.loadDB()
-    print(app.msgObjs)
+    class OS():
+        def __init__(self):
+            self.size = (320, 480)
+            pygame.init()
+            self.screen = pygame.display.set_mode(self.size, pygame.FULLSCREEN)
+            self.BLACK = (0, 0, 0)
+            self.WHITE = (255, 255, 255)
+            self.GREEN = (0, 255, 0)
+            self.RED = (255, 0, 0)
+            self.BLUE = (0, 0, 255)
+            self.clock = pygame.time.Clock()
 
-#note
+        def OSUpdate(self, FONA):
+            pygame.display.flip()
+            self.clock.tick(60)
+    os = OS()
+    fona = None
+    app = app(os,fona)
+    pygame.display.set_mode(os.size)
+    while True:
+        app.main()
+
+
+
+#notes
 #AT+CMGF=1 enters text mode
 #AT+CMGR=X gets texts from slots
 
