@@ -53,7 +53,7 @@ class app():
                             self.openedConvo = self.currentScroll+1
                         self.tapBuffer = -2
                     if self.tapBuffer == 3:
-                        if(len(self.msgObjs)<self.currentScroll+2):
+                        if(len(self.msgObjs)>self.currentScroll+2):
                             self.currentScroll += 2
                         else:
                             self.currentScroll = 0
