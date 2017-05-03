@@ -10,7 +10,7 @@ class app():
         self.OS = OS
         self.FONA=FONA
         # todo FOR DRAW DEBUG
-        #self.topBar = topBar.topBar(OS)
+        self.topBar = topBar.topBar(OS)
 
         self.msgObjs = []
 

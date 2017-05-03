@@ -100,6 +100,7 @@ class OSMain:
 
     def checkIncoming(self, FONA):
         lines = FONA.getLines()
+        print(lines)
         #if self.incomingAcknowledged == True:
         #    self.incomingAcknowledged = False
         #    lines = []
@@ -129,7 +130,7 @@ class OSMain:
             #                    break
             #    clock.tick(60)
                 # Call
-        if "+CMTI" in lines:
+        if " 'CMTI: \"SM\"" in lines:
             # Text
             print("Text recieved")
             #todo temp solution. sucks
