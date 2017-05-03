@@ -1,7 +1,7 @@
 import json
 import pygame
 #TODO FIX
-#import topBar, serialConn
+import topBar, serialConn
 from pygame.locals import *
 
 class app():
@@ -86,7 +86,7 @@ class app():
         self.OS.screen.fill(self.OS.WHITE)
         while not done:
             #todo FOR DRAW DEBug
-            #self.topBar.tick()
+            self.topBar.tick()
             self.OS.OSUpdate(self.FONA)
             self.OS.screen.fill(self.OS.WHITE)
             self.drawConvoView(convoObj["phone_number"],pagedMsgs,currentScroll)
