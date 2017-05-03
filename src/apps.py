@@ -18,7 +18,6 @@ class systemApps:
             if event.pos[0] > 0 and event.pos[0] < 80:
                 if event.pos[1] > 140 and event.pos[1] < 220:
                     print(1)
-                    #TODO add these in for other options CONFIRM THAT APP IS LOADED
                     if len(self.loadedAppObjects)>0:
                         self.loadedAppObjects[0].main()
                     return 1
@@ -97,7 +96,7 @@ class systemApps:
         if event.type == MOUSEBUTTONDOWN:
             if event.pos[0] > 0 and event.pos[0] < 160:
                 if event.pos[1] > 90 and event.pos[1] < 125:
-                    self.OS.incomingAcknowledged = False
+                    self.OS.incomingAcknowledged = True
                     self.FONA.transmit("ATA")
                     return "ANSWER"
             if event.pos[0] > 160 and event.pos[0] < 320:

@@ -37,8 +37,17 @@ class serialCon():
         
         
 if __name__ == '__main__':
-    test = serialCon()
-    test.connect()
+        # OS = OSMain()
 
-    while (True):
-        test.getLines()
+    # connect to the GSM module
+    FONA = serialCon()
+    FONA.connect()
+
+    res = FONA.transmit("AT+CMGR=2")
+    print(res)
+
+    #test = serialCon()
+    #test.connect()
+
+    #while (True):
+    #    test.getLines()
