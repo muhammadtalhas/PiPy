@@ -1,45 +1,29 @@
 {
   "messages":[
     {
-      "phone_number":"7032033596",
+      "phone_number":"+17032033596",
       "msgs":[
         {"time":"1493093368","data":"hey","type":"IN"},
         {"time":"1493093401","data":"Hey","type":"OUT"},
         {"time":"1493093402","data":"Come over","type":"IN"},
-        {"time":"1493093403","data":"I can't im making a fuckin phone","type":"OUT"},
-        {"time":"1493093404","data":"My Parents are't home","type":"IN"},
-        {"time":"1493093405","data":"ok so?","type":"OUT"}
+        {"time":"1493093403","data":"I can't im making a phone","type":"OUT"},
+        {"time":"1493093404","data":"My Parents are't home","type":"IN"}
 
       ]
     },
     {
-      "phone_number":"+17036556021",
+      "phone_number":"1111111111",
       "msgs":[
-        {"time":"1493093360","data":"Test from Mom","type":"IN"},
-        {"time":"1493093396","data":"Another Test Msg from MOM","type":"OUT"}
+        {"time":"1493093360","data":"Test yo ","type":"IN"},
+        {"time":"1493093396","data":"Another Test Msg ","type":"OUT"}
       ]
     },
     {
-      "phone_number":"7035558946",
+      "phone_number":"1111111111",
       "msgs":[
-        {"time":"1493093360","data":"Test from test","type":"IN"},
-        {"time":"1493093396","data":"Another Test Msg from test","type":"OUT"}
-      ]
-    },
-    {
-      "phone_number":"7035459868",
-      "msgs":[
-        {"time":"1493093360","data":"Test from test","type":"IN"},
-        {"time":"1493093396","data":"Another Test Msg from test","type":"OUT"}
-      ]
-    },
-    {
-      "phone_number":"7037037033",
-      "msgs":[
-        {"time":"1493093360","data":"Test from test","type":"IN"},
-        {"time":"1493093396","data":"Another Test Msg from test","type":"OUT"}
+        {"time":"1493093360","data":"Test yo ","type":"IN"},
+        {"time":"1493093396","data":"Another Test Msg ","type":"OUT"}
       ]
     }
-
   ]
 }
