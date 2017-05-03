@@ -131,6 +131,7 @@ class OSMain:
                 # Call
         if "+CMTI" in lines:
             # Text
+            print("Text recieved")
             #todo temp solution. sucks
             done = False
             pointer = 1
@@ -142,6 +143,8 @@ class OSMain:
                     msgIndex = (len(res)-1)-2
                     msgData = res[msgIndex]
                     number = res[3]
+                    dbLoad = self.getDBObj()
+                    self.updateDB(dbLoad, number,msgData)
                     pointer +=1
         #else:
             #print("nothing of value in " + str(lines))
