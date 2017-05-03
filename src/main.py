@@ -138,7 +138,7 @@ class OSMain:
             pointer = 1
             while not done:
                 print("AT+CMGR+"+str(pointer))
-                res = FONA.transmit("AT+CMGR"+str(pointer))
+                res = FONA.transmit("AT+CMGR+"+str(pointer))
                 print("res "+ str(res))
                 if len(res) == 2:
                     done = True
