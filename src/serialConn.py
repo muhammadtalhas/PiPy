@@ -42,6 +42,7 @@ if __name__ == '__main__':
     # connect to the GSM module
     FONA = serialCon()
     FONA.connect()
+    FONA.transmit("AT+CMGF=1")
 
     res = FONA.transmit("AT+CMGR=2")
     print(res)
