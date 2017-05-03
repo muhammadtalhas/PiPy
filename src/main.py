@@ -148,7 +148,7 @@ class OSMain:
                     print("res 3: "+str(res[3]))
                     msgIndex = (len(res)-1)-2
                     msgData = res[msgIndex]
-                    number = res[3]
+                    number = res[2]
                     dbLoad = self.getDBObj()
                     self.updateDB(dbLoad, number,msgData)
                     pointer +=1
