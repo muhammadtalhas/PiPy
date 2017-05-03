@@ -137,13 +137,15 @@ class OSMain:
             done = False
             pointer = 1
             while not done:
-                print("AT+CMGR+"+str(pointer))
-                res = FONA.transmit("AT+CMGR+"+str(pointer))
+                print("AT+CMGR="+str(pointer))
+                res = FONA.transmit("AT+CMGR="+str(pointer))
                 print("res "+ str(res))
                 if len(res) == 2:
                     done = True
                 else:
                     print("this is proper")
+                    print(str(res))
+                    print("res 3: "+str(res[3]))
                     msgIndex = (len(res)-1)-2
                     msgData = res[msgIndex]
                     number = res[3]
@@ -160,7 +162,7 @@ class OSMain:
     def updateDB(self,db, number, data):
         entry ={"time":"0","data":data,"type":"IN"}
         foundAt = -1
-        for index in range(0, len(db["messages"]-1)):
+        for index in range(0, len(db["messages"])-1):
             if db["messages"][index]["phone_number"] == str(number):
                 foundAt = index
                 break
@@ -169,7 +171,7 @@ class OSMain:
 
         if foundAt == -1:
             print("new number")
-            newObj = {"phone_number":number,"msgs":[entry]}
+            newObj = {"phone_number":str(number),"msgs":[entry]}
             db["messages"].append(newObj)
         else:
             print("old number")
