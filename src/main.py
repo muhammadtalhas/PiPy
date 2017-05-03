@@ -139,7 +139,7 @@ class OSMain:
             while not done:
                 print("AT+CMGR"+str(pointer))
                 res = FONA.transmit("AT+CMGR"+str(pointer))
-                print("res "+ res)
+                print("res "+ str(res))
                 if len(res) == 2:
                     done = True
                 else:
@@ -175,7 +175,7 @@ class OSMain:
             print("old number")
             db["messages"][foundAt]["msgs"].append(entry)
 
-        print("new db " + db)
+        print("new db " + str(db))
         with open("../apps/messaging/messageDB.json", "w") as data_file:
             data_file.seek(0)  # rewind
             json.dump(db, data_file)
