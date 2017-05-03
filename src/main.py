@@ -137,10 +137,13 @@ class OSMain:
             done = False
             pointer = 1
             while not done:
+                print("AT+CMGR"+str(pointer))
                 res = FONA.transmit("AT+CMGR"+str(pointer))
+                print("res "+ res)
                 if len(res) == 2:
                     done = True
                 else:
+                    print("this is proper")
                     msgIndex = (len(res)-1)-2
                     msgData = res[msgIndex]
                     number = res[3]
@@ -165,11 +168,14 @@ class OSMain:
                 pass
 
         if foundAt == -1:
+            print("new number")
             newObj = {"phone_number":number,"msgs":[entry]}
             db["messages"].append(newObj)
         else:
+            print("old number")
             db["messages"][foundAt]["msgs"].append(entry)
 
+        print("new db " + db)
         with open("../apps/messaging/messageDB.json", "w") as data_file:
             data_file.seek(0)  # rewind
             json.dump(db, data_file)
