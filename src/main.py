@@ -130,7 +130,7 @@ class OSMain:
             #                    break
             #    clock.tick(60)
                 # Call
-        if " 'CMTI: \"SM\"" in lines:
+        if any("+CMTI" in data for data in lines):
             # Text
             print("Text recieved")
             #todo temp solution. sucks
