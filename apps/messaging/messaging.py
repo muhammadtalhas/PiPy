@@ -42,6 +42,7 @@ class app():
             #TODO other views
             else:
                 self.initConvoScreen(self.msgObjs[self.openedConvo])
+                self.openedConvo = -1 #on stack pop
             # todo FOR DRAW DEBUG
             events = self.OS.getEvents()
             for event in events:
@@ -359,6 +360,11 @@ class app():
                 self.msgObjs.append(convo)
 
 if __name__ == "__main__":
+    entry = {"time": "0", "data": "TEST", "type": "IN"}
+    newObj = {"phone_number": "7032300658", "msgs": [entry]}
+    print(str(newObj))
+    exit(0)
+
     class OS():
         def __init__(self):
             self.size = (320, 480)
@@ -416,6 +422,7 @@ if __name__ == "__main__":
         #{"time":"1493093405","data":"ok so?","type":"OUT"}
       #],1)
         pygame.display.flip()
+
 
 
 
