@@ -1,5 +1,6 @@
 import json
 import pygame
+import time
 #TODO FIX
 import topBar, serialConn
 from pygame.locals import *
@@ -42,7 +43,7 @@ class app():
             #TODO other views
             else:
                 self.initConvoScreen(self.msgObjs[self.openedConvo])
-                self.openedConvo = -1 #on stack pop
+                self.openedConvo = -1 #on stac
             # todo FOR DRAW DEBUG
             events = self.OS.getEvents()
             for event in events:
@@ -239,6 +240,14 @@ class app():
                         msgStr = msgStr[:-1]
                     elif tap == "__SPACE__":
                         msgStr += " "
+                    elif tap == "__ENTER__":
+                        handshake = str(msgStr)
+                        msgStr = "SENDING...."
+                        if len(msgStr) >0:
+                            self.sendMsg(number, handshake)
+                            done = True
+                        else:
+                            done = True
                     elif tap == "__SHIFT__":
                         pass
                     elif tap == None:
@@ -350,8 +359,18 @@ class app():
                     return "__ENTER__"
 
 
-
-
+    def sendMsg(self, number, msg):
+        self.FONA.transmit('AT+CMGF=1')
+        time.sleep(.25)
+        self.FONA.transmit('AT+CMGS="' + number + '"')
+        time.sleep(.25)
+        self.FONA.transmit(msg)
+        time.sleep(.25)
+        res = self.FONA.transmit(chr(26))
+        if any("OK" in response for response in res):
+            db = self.OS.getDBObj()
+            self.updateDB(self,db, number, msg, "OUT")
+        #TODO else
     def loadDB(self):
         #TODO do a search for ".." and make everything full path. Relative will break stuff dependign on enviorment
         with open('../apps/messaging/messageDB.json') as data_file:
@@ -401,7 +420,7 @@ if __name__ == "__main__":
         {"time":"1493093368","data":"hey","type":"IN"},
         {"time":"1493093401","data":"Hey","type":"OUT"},
         {"time":"1493093402","data":"Come over","type":"IN"},
-        {"time":"1493093403","data":"I can't im making a fuckin phone","type":"OUT"},
+        {"time":"1493093403","data":"I can't im making a phone","type":"OUT"},
         {"time":"1493093404","data":"My Parents are't home","type":"IN"},
         {"time":"1493093405","data":"ok so?","type":"OUT"},
         {"time":"1493093368","data":"hey","type":"IN"},

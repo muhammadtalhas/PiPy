@@ -150,7 +150,7 @@ class OSMain:
                     msgData = res[msgIndex]
                     number = res[2]
                     dbLoad = self.getDBObj()
-                    self.updateDB(dbLoad, number,msgData)
+                    self.updateDB(dbLoad, number,msgData, "IN")
                     pointer +=1
         #else:
             #print("nothing of value in " + str(lines))
@@ -159,8 +159,8 @@ class OSMain:
             data = json.load(data_file)
         return data
 
-    def updateDB(self,db, number, data):
-        entry ={"time":"0","data":data,"type":"IN"}
+    def updateDB(self,db, number, data, direction):
+        entry ={"time":"0","data":data,"type":direction}
         foundAt = -1
         for index in range(0, len(db["messages"])-1):
             if db["messages"][index]["phone_number"] == str(number):
@@ -192,7 +192,7 @@ FONA.connect()
 
 # setup FONA
 FONA.transmit("AT+CHFA=1")
-FONA.transmit("AT+CMIC=0,15")#test headphones
+FONA.transmit("AT+CMIC=1,15")
 FONA.transmit("AT+CMGF=1")
 
 # load up apps
