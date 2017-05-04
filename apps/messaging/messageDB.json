@@ -12,14 +12,14 @@
       ]
     },
     {
-      "phone_number":"1111111111",
+      "phone_number":"Test_Contact 1",
       "msgs":[
         {"time":"1493093360","data":"Test yo ","type":"IN"},
         {"time":"1493093396","data":"Another Test Msg ","type":"OUT"}
       ]
     },
     {
-      "phone_number":"1111111111",
+      "phone_number":"Test Contact 2",
       "msgs":[
         {"time":"1493093360","data":"Test yo ","type":"IN"},
         {"time":"1493093396","data":"Another Test Msg ","type":"OUT"}
